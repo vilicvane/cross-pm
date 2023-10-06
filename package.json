@@ -5,19 +5,26 @@
   "repository": "https://github.com/vilic/cross-pm.git",
   "license": "MIT",
   "author": "vilicvane",
+  "bin": {
+    "cross-pm": "./bld/cli/main.js",
+    "xpm": "./bld/cli/main.js"
+  },
   "scripts": {
     "3": "pnpm install && pnpm dedupe && pnpm install",
+    "xpm": "node ./bld/cli/main.js",
     "build": "rimraf ./bld && tsc --build",
     "lint": "eslint --no-error-on-unmatched-pattern . && run-in-every eslint-project --parallel --echo -- eslint --no-error-on-unmatched-pattern .",
     "lint-prettier": "prettier --check .",
     "test": "pnpm lint-prettier && pnpm build && pnpm lint"
   },
   "dependencies": {
+    "main-function": "^0.1.7",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@mufan/code": "^0.2.17",
     "@mufan/eslint-plugin": "^0.1.82",
+    "@types/node": "^20.8.2",
     "eslint": "^8.50.0",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",

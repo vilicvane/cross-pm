@@ -6,6 +6,19 @@
 
 Spawn npm/yarn/pnpm accordingly based on different lock files found in the context.
 
+## Installation
+
+```sh
+npm install --global cross-pm
+```
+
+## Usage
+
+```sh
+xpm add/remove(rm)/install/run/exec [options]
+xpm [script] [options]
+```
+
 ## License
 
 MIT License.
