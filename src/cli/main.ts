@@ -4,8 +4,11 @@ import {spawn} from 'child_process';
 import {once} from 'events';
 import {join} from 'path';
 
+import Chalk from 'chalk';
+import {commandJoin} from 'command-join';
 import main from 'main-function';
 
+import type {PackageMangerName} from './@context';
 import {detectPackageManger} from './@context';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -55,7 +58,6 @@ USAGES:
 
       break;
     case 'install':
-      break;
     case 'run':
       break;
     case 'exec':
@@ -68,7 +70,8 @@ USAGES:
 
       break;
     default:
-      if (hasOwnProperty.call(scripts, command)) {
+      if (hasOwnProperty.call(scripts, subcommand)) {
+        restArgs.unshift(subcommand);
         subcommand = 'run';
       } else {
         switch (name) {
@@ -76,6 +79,7 @@ USAGES:
             command = 'npx';
             break;
           default:
+            restArgs.unshift(subcommand);
             subcommand = 'exec';
             break;
         }
@@ -88,6 +92,9 @@ USAGES:
     (arg): arg is string => typeof arg === 'string',
   );
 
+  console.info(`${colorizePackageMangerName(name)} ${commandJoin(args)}`);
+  console.info();
+
   const cp = spawn(command, args, {
     shell: true,
     cwd: dir,
@@ -98,3 +105,14 @@ USAGES:
 
   return code;
 });
+
+function colorizePackageMangerName(name: PackageMangerName): string {
+  switch (name) {
+    case 'npm':
+      return Chalk.red(name);
+    case 'yarn':
+      return Chalk.cyan(name);
+    case 'pnpm':
+      return Chalk.yellow(name);
+  }
+}
