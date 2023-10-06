@@ -69,19 +69,14 @@ USAGES:
 
       break;
     default:
+      if (restArgs.length > 0 && restArgs[0] !== '--') {
+        restArgs.unshift(subcommand, '--');
+      }
+
       if (hasOwnProperty.call(scripts, subcommand)) {
-        restArgs.unshift(subcommand);
         subcommand = 'run';
       } else {
-        switch (name) {
-          case 'npm':
-            command = 'npx';
-            break;
-          default:
-            restArgs.unshift(subcommand);
-            subcommand = 'exec';
-            break;
-        }
+        subcommand = 'exec';
       }
 
       break;
