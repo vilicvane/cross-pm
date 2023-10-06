@@ -30,7 +30,6 @@ main(async ([firstArg, ...restArgs]) => {
 USAGES:
 
   xpm add/remove(rm)/install/run/exec [options]
-
   xpm [script] [options]
 `);
       return;
