@@ -1,0 +1,23 @@
+{
+  "$schema": "boilerplate.schema.json",
+  "boilerplate": "@mufan/code-boilerplates/typescript",
+  "options": {
+    "name": "cross-pm",
+    "description": "Spawn npm/yarn/pnpm accordingly based on different lock files found in the context.",
+    "repository": "https://github.com/vilic/cross-pm.git",
+    "license": "MIT",
+    "author": "vilicvane",
+    "badges": {
+      "npm": true,
+      "repo": true,
+      "license": true
+    },
+    "defaultBranch": "master",
+    "packageManager": "pnpm",
+    "projects": [
+      {
+        "name": "cli"
+      }
+    ]
+  }
+}
