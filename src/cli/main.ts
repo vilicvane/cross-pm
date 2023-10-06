@@ -20,7 +20,7 @@ main(async ([firstArg, ...restArgs]) => {
 
   const {scripts = {}} = require(join(dir, 'package.json'));
 
-  let command: string = name;
+  const command: string = name;
   let subcommand: string | undefined = firstArg;
 
   switch (firstArg) {
@@ -58,20 +58,14 @@ USAGES:
       break;
     case 'install':
     case 'run':
-      break;
     case 'exec':
-      switch (name) {
-        case 'npm':
-          command = 'npx';
-          subcommand = undefined;
-          break;
-      }
-
       break;
     default:
       if (restArgs.length > 0 && restArgs[0] !== '--') {
-        restArgs.unshift(subcommand, '--');
+        restArgs.unshift('--');
       }
+
+      restArgs.unshift(subcommand);
 
       if (hasOwnProperty.call(scripts, subcommand)) {
         subcommand = 'run';
