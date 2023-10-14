@@ -61,8 +61,13 @@ USAGES:
     case 'exec':
       break;
     default:
-      if (restArgs.length > 0 && restArgs[0] !== '--') {
-        restArgs.unshift('--');
+      switch (name) {
+        case 'npm':
+          if (restArgs.length > 0) {
+            restArgs.unshift('--');
+          }
+
+          break;
       }
 
       restArgs.unshift(subcommand);
@@ -70,7 +75,14 @@ USAGES:
       if (hasOwnProperty.call(scripts, subcommand)) {
         subcommand = 'run';
       } else {
-        subcommand = 'exec';
+        switch (name) {
+          case 'yarn':
+            subcommand = undefined;
+            break;
+          default:
+            subcommand = 'exec';
+            break;
+        }
       }
 
       break;
