@@ -95,11 +95,15 @@ USAGES:
   console.info(`${colorizePackageMangerName(name)} ${commandJoin(args)}`);
   console.info();
 
-  const cp = spawn(command, args, {
-    shell: true,
-    cwd: dir,
-    stdio: 'inherit',
-  });
+  const cp = spawn(
+    command,
+    args.map(arg => commandJoin([arg])),
+    {
+      shell: true,
+      cwd: dir,
+      stdio: 'inherit',
+    },
+  );
 
   const [code] = (await once(cp, 'exit')) as [number];
 
